@@ -12,10 +12,8 @@ const range = (start, end, step) => {
   return rangeValues
 }
 
-const sum = (range) => {
-  return range.reduce((acc, next) => acc + next)
-}
+const sum = (range) => range.reduce((acc, next) => acc + next)
 
 console.log(range(24, 8, -3))
 console.log(range(3, 28, 4))
-console.log(sum(range(3, 28, 4)))
+console.log(sum(range(1, 10, 2)))
