@@ -41,21 +41,19 @@ const ancestry = [
   {"name": "Jacobus Bernardus van Brussel", "sex": "m", "born": 1736, "died": 1809, "father": "Jan van Brussel", "mother": "Elisabeth Haverbeke"}
 ]
 
-let ages = []
+let byName = {}
 
 // calculate average age difference
 const average = ages => {
   const add = (acc, curr) => acc + curr
-  return (ages.reduce(add)/ages.length).toFixed(0)
+  return (ages.reduce(add)/ages.length).toFixed(1)
 }
 
-// get mother's born year
-const motherBornDate = mother => ancestry.filter(person => person.name == mother)[0].born
+// make a list by name
+ancestry.forEach(person => byName[person.name] = person)
 
-// iterate over each person in the array and get the age difference
-ancestry.forEach(person => {
-  if((person.mother != null) && (ancestry.some(people => person.mother == people.name)))
-    ages.push(person.born - motherBornDate(person.mother))
-})
+// make an array of age differences
+let ageDifferences = ancestry.filter(person => byName[person.mother] != null)
+                             .map(person => person.born - byName[person.mother].born)
 
-console.log(average(ages))
+console.log(average(ageDifferences))
